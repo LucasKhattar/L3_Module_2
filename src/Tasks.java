@@ -55,6 +55,7 @@ public class Tasks implements ActionListener {
 			String rem = JOptionPane.showInputDialog(null, "What Task Will You Like To Remove?");
 			if (tasks.contains(rem)) {
 				JOptionPane.showMessageDialog(null, "Removed " + rem);
+				tasks.remove(rem);
 			} else {
 				JOptionPane.showMessageDialog(null, "Sorry There Was No Task Called " + rem);
 			}
@@ -64,7 +65,6 @@ public class Tasks implements ActionListener {
 				FileWriter fw = new FileWriter("src/intro_to_file_io/tasks.txt");
 				for (int i = 0; i < tasks.size(); i++) {
 					fw.write(tasks.get(i) + "\n");
-					
 				}
 
 				fw.close();
@@ -75,15 +75,16 @@ public class Tasks implements ActionListener {
 		} else if (e.getSource().equals(load)) {
 			try {
 				BufferedReader br = new BufferedReader(new FileReader("src/intro_to_file_io/tasks.txt"));
-				
+
 				String line = br.readLine();
 				String loaf = "";
-				while(line != null){
-					loaf+="\n"+line;
+				tasks.clear();
+				while (line != null) {
+					loaf += "\n" + line;
 					tasks.add(line);
 					line = br.readLine();
 				}
-				JOptionPane.showMessageDialog(null, "Your Tasks Are: "+loaf);
+				JOptionPane.showMessageDialog(null, "Your Tasks Are: " + loaf);
 				br.close();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
